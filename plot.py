@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
+# plot array
 def plotImages(images_arr):
     fig, axes = plt.subplots(1, 5, figsize=(20,20))
     axes = axes.flatten()
@@ -11,7 +13,7 @@ def plotImages(images_arr):
 images = [x_train[i] for i in range(5)]
 plotImages(images)
 
-
+# plot metrics
 acc = history.history['accuracy']
 val_acc = history.history['val_accuracy']
 
@@ -34,3 +36,24 @@ plt.legend(loc='upper right')
 plt.title('Training and Validation Loss')
 plt.show()
 
+# plot jpg images
+# Parameters for our graph; we'll output images in a 4x4 configuration
+nrows = 4
+ncols = 4
+
+# Set up matplotlib fig, and size it to fit 4x4 pics
+fig = plt.gcf()
+fig.set_size_inches(ncols*4, nrows*4)
+
+images = roses[:16]
+print(images)
+
+for i, img_path in enumerate(images):
+  # Set up subplot; subplot indices start at 1
+  sp = plt.subplot(nrows, ncols, i + 1)
+  sp.axis('Off') # Don't show axes (or gridlines)
+
+  img = mpimg.imread(img_path)
+  plt.imshow(img)
+
+plt.show()
